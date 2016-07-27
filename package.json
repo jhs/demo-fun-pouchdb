@@ -1,0 +1,23 @@
+{
+  "name": "demo-fun-pouchdb",
+  "version": "1.0.0",
+  "description": "Demo Fun PouchDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "tap test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhs/demo-fun-pouchdb.git"
+  },
+  "keywords": [
+    "couchdb",
+    "pouchdb"
+  ],
+  "author": "Jason Smith <jason.h.smith@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jhs/demo-fun-pouchdb/issues"
+  },
+  "homepage": "https://github.com/jhs/demo-fun-pouchdb#readme"
+}
