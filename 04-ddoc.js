@@ -1,5 +1,4 @@
 module.exports = make_server
-module.exports.blog_ddoc = make_blog_ddoc
 
 // Demo web application
 // A very rough approximation of a content management system
@@ -7,6 +6,8 @@ module.exports.blog_ddoc = make_blog_ddoc
 
 var Hapi = require('hapi')
 var DB = require('fun-pouchdb').defaults({prefix: __dirname})
+
+var blog_ddoc = require('./04-blog-ddoc.js')
 
 const CLOUDANT = {account:'jhs', password:'31dfd78dc02879a7f08b49a785f15a7b54c52caa'}
 
@@ -38,7 +39,7 @@ function make_server(callback) {
   // Server done. Initialize the DBs
   //
 
-  DB({blogs:{cloudant:CLOUDANT, ddoc:make_blog_ddoc()}, prefs:{cloudant:CLOUDANT}}, function(er, dbs) {
+  DB({blogs:{cloudant:CLOUDANT, ddoc:blog_ddoc()}, prefs:{cloudant:CLOUDANT}}, function(er, dbs) {
     if (er)
       return callback(er)
 
@@ -90,20 +91,6 @@ function preferences(req, reply) {
     // TODO: Actually do this.
     reply({error:'Not implemented'})
       .code(500)
-  }
-}
-
-function make_blog_ddoc() {
-  return {
-    _id: '_design/blogs',
-    views: {
-      blog_slug: {
-        map: function(doc) {
-          if (doc.slug)
-            emit(doc.slug, doc)
-        }
-      }
-    }
   }
 }
 
