@@ -92,20 +92,24 @@ function blog_post(req, reply) {
 }
 
 function preferences(req, reply) {
-  console.log('prefs', req.method)
   var user = req.params.user
 
   if (req.method == 'get') {
-    // TODO: Actually do this.
-    var preferences = {}
+    // Get the user's prefs doc.
+    req.server.app.prefs.get(user, function(er, preferences) {
+      console.log(er)
+      if (er && er.status == 404)
+        preferences = {}                    // Just start with empty preferences.
+      else if (er)
+        return reply(er.message).code(500)  // Nope. Something really went wrong.
 
-    console.log('Got preferences for %s: %j', user, preferences)
-    reply(preferences)
+      console.log('Got preferences for %s: %j', user, preferences)
+      reply(preferences)
+    })
   }
   
   else if (req.method == 'post') {
     // TODO: Actually do this.
-    
     reply({error:'Not implemented'})
       .code(500)
   }
