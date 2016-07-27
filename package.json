@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/jhs/demo-fun-pouchdb/issues"
   },
-  "homepage": "https://github.com/jhs/demo-fun-pouchdb#readme"
+  "homepage": "https://github.com/jhs/demo-fun-pouchdb#readme",
+  "dependencies": {
+    "hapi": "^13.5.0"
+  }
 }
